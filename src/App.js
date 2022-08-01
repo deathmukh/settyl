@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import TextComponent from "./TextComponent";
 
 function App() {
+  const [hide, setHide] = useState("true");
+
+  const handleClick = () => {
+    setHide(!hide);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {hide && <TextComponent/>}
+        {/* <div>Hello</div> */}
+      
+      <button onClick={handleClick}>{hide ? 'Click me to hide text' : 'Click me to show text'}</button>
     </div>
   );
 }
