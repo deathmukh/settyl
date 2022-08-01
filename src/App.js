@@ -30,10 +30,6 @@ function App() {
   const getData = async() => {
     const data = await axios.get('https://dummy.restapiexample.com/api/v1/employees')
     setData(data.data.data)
-    console.log(data.data.data)
-    setchartData = `data = {
-      datasets = ${data.data.data}
-    }`
   }
 
   useEffect(() => {
