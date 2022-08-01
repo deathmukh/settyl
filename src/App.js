@@ -10,10 +10,11 @@ function App() {
 
   return (
     <div className="App">
-      {hide && <TextComponent/>}
-        {/* <div>Hello</div> */}
-      
-      <button onClick={handleClick}>{hide ? 'Click me to hide text' : 'Click me to show text'}</button>
+      <button onClick={handleClick}>
+        {hide ? "Click me to hide text" : "Click me to show text"}
+      </button>
+
+      {hide && <TextComponent />}
     </div>
   );
 }
