@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ResizeText from "./ResizeText";
 import TextComponent from "./TextComponent";
 import axios from "axios";
-import { Line, LineChart, XAxis } from "recharts";
+import { Line, LineChart, XAxis, YAxis } from "recharts";
 
 function App() {
   const [hide, setHide] = useState("true");
@@ -41,6 +41,7 @@ function App() {
   };
 
   useEffect(() => {
+    handleWindowResize();
     window.addEventListener("resize", handleWindowResize);
   }, []);
 
@@ -59,16 +60,23 @@ function App() {
       <hr />
 
       <button onClick={getData}>Make api request</button>
-      <p>{JSON.stringify(apidata, null, 4)}</p>
-
-      <button onClick={handleBackendRequest}>Save to Mongo</button>
+      {/* <p>{JSON.stringify(apidata, null, 4)}</p> */}
 
       {apidata !== "No data" && (
+
+        <div>
+          <p>Data Fetch Successful</p>
+
         <LineChart width={1080} height={400} data={apidata}>
           <XAxis dataKey="id" />
+          <YAxis dataKey="employee_salary" />
           <Line type="monotone" dataKey="employee_salary" stroke="#8884d8" />
         </LineChart>
+
+        </div>
       )}
+
+      <button onClick={handleBackendRequest}>Save to Mongo</button>
     </div>
   );
 }
