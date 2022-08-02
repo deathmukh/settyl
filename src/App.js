@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ResizeText from "./ResizeText";
 import TextComponent from "./TextComponent";
 import axios from "axios";
+import { Line, LineChart, XAxis } from "recharts";
 
 function App() {
   const [hide, setHide] = useState("true");
@@ -36,7 +37,7 @@ function App() {
 
   const handleBackendRequest = async () => {
     const data = await axios.post("http://localhost:8000/save-mongo", apidata);
-    console.log(data.status)
+    console.log(data.status);
   };
 
   useEffect(() => {
@@ -61,6 +62,13 @@ function App() {
       <p>{JSON.stringify(apidata, null, 4)}</p>
 
       <button onClick={handleBackendRequest}>Save to Mongo</button>
+
+      {apidata !== "No data" && (
+        <LineChart width={1080} height={400} data={apidata}>
+          <XAxis dataKey="id" />
+          <Line type="monotone" dataKey="employee_salary" stroke="#8884d8" />
+        </LineChart>
+      )}
     </div>
   );
 }
