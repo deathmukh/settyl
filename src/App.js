@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import ResizeText from "./ResizeText";
 import TextComponent from "./TextComponent";
-import axios from 'axios'
+import axios from "axios";
 
 function App() {
   const [hide, setHide] = useState("true");
   const [resizeText, setResizetext] = useState("");
-  const [data, setData] = useState('No data')
+  const [apidata, setApiData] = useState("No data");
 
   const handleClick = () => {
     setHide(!hide);
@@ -27,13 +27,20 @@ function App() {
     }
   };
 
-  const getData = async() => {
-    const data = await axios.get('https://dummy.restapiexample.com/api/v1/employees')
-    setData(data.data.data)
-  }
+  const getData = async () => {
+    const data = await axios.get(
+      "https://dummy.restapiexample.com/api/v1/employees"
+    );
+    setApiData(data.data.data);
+  };
+
+  const handleBackendRequest = async () => {
+    const data = await axios.post("http://localhost:8000/save-mongo", apidata);
+    console.log(data.status)
+  };
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowResize)
+    window.addEventListener("resize", handleWindowResize);
   }, []);
 
   return (
@@ -46,14 +53,14 @@ function App() {
 
       <hr />
 
-      <ResizeText resizeText={resizeText}/>
+      <ResizeText resizeText={resizeText} />
 
-      <hr/>
+      <hr />
 
       <button onClick={getData}>Make api request</button>
-      <p>{JSON.stringify(data, null, 4)}</p>
+      <p>{JSON.stringify(apidata, null, 4)}</p>
 
-
+      <button onClick={handleBackendRequest}>Save to Mongo</button>
     </div>
   );
 }
