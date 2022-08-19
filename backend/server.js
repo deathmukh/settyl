@@ -41,4 +41,10 @@ app.post('/save-mongo', async(req, res) => {
   }
 })
 
-app.listen(8000, () => console.log(`server is running`))
+const PORT = process.env.PORT || 5000
+
+if (process.env.NODE_ENV == 'production'){
+  app.use(express.static("client/build"));
+}
+
+app.listen(PORT, () => console.log(`server is running`))

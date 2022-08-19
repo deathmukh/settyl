@@ -36,7 +36,7 @@ function App() {
   };
 
   const handleBackendRequest = async () => {
-    const data = await axios.post("http://localhost:8000/save-mongo", apidata);
+    const data = await axios.post("/save-mongo", apidata);
     console.log(data.status);
   };
 
